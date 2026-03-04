@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>回测报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; }
+        .metric-value { font-size: 2em; font-weight: bold; }
+        .metric-label { font-size: 0.9em; opacity: 0.9; }
+        .chart-container { margin: 30px 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        tr:hover { background: #f5f5f5; }
+        .buy { color: #e74c3c; }
+        .sell { color: #27ae60; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 股票策略回测报告</h1>
+        <p>生成时间：2026-03-04 19:14:09</p>
+        
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-value">-5.74%</div>
+                <div class="metric-label">总收益率</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">-20.20%</div>
+                <div class="metric-label">年化收益率</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">-1.16</div>
+                <div class="metric-label">夏普比率</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">7.03%</div>
+                <div class="metric-label">最大回撤</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">0.00%</div>
+                <div class="metric-label">胜率</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">交易次数</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>权益曲线</h2>
+            <canvas id="equityChart"></canvas>
+        </div>
+        
+        <h2>交易记录</h2>
+        <table>
+            <tr><th>时间</th><th>方向</th><th>价格</th><th>数量</th><th>手续费</th></tr>
+            <tr><td>2026-01-14</td><td class='buy'>BUY</td><td>14.31</td><td>6638</td><td>28.50</td></tr>
+        </table>
+        
+    </div>
+    
+    <script>
+        const ctx = document.getElementById('equityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 66}, (_, i) => i),
+                datasets: [{
+                    label: '账户权益',
+                    data: [100000,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,100000.0,99971.503066,97515.443066,97050.783066,98643.903066,95988.70306600002,98444.763066,96918.02306600001,98179.243066,98312.003066,99042.18306600001,96785.263066,97050.783066,96386.983066,98643.903066,97648.20306600002,97648.20306600002,97117.16306600001,97847.343066,100104.263066,100170.643066,101033.583066,99108.563066,99241.323066,96984.403066,95391.283066,97648.20306600002,97515.443066,96386.983066,96453.363066,93930.923066,96984.403066,96121.46306600001,96652.503066,96187.843066,96055.083066,94262.823066],
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
